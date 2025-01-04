@@ -8,8 +8,8 @@ echo "Start build ...."
 current_branch=$(git branch --show-current)
 echo "Checking build branch with $current_branch ..."
 
-if [ "$current_branch" != "master" ]; then
-  echo "Not on the master branch. Aborting the build."
+if [ "$current_branch" != "feature" ]; then
+  echo "Not on the feature branch. Aborting the build."
   exit 1
 fi
 
