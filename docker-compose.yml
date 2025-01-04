@@ -18,18 +18,6 @@ services:
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
     volumes:
       - ./webserver/nginx/app.conf:/etc/nginx/conf.d/app.conf:ro
-      - ./webserver/certbot/conf:/etc/letsencrypt
-      - ./webserver/certbot/www:/var/www/certbot
-    networks:
-      - "devops-internship"
-
-  ssl:
-    image: certbot/certbot:v2.10.0
-    container_name: ssl
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    volumes:
-      - ./webserver/certbot/conf:/etc/letsencrypt
-      - ./webserver/certbot/www:/var/www/certbot
     networks:
       - "devops-internship"
 
