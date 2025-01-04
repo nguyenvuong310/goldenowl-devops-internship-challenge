@@ -21,7 +21,7 @@ echo "Logging into DockerHub..."
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
 
 echo "Building Docker image: $DOCKER_IMAGE_NAME:$DOCKER_TAG ..."
-docker build -t $DOCKER_IMAGE_NAME:$DOCKER_TAG . --platform linux/amd64
+docker build -t $DOCKER_IMAGE_NAME:$DOCKER_TAG ./src --platform linux/amd64
 
 echo "Pushing Docker image to DockerHub..."
 docker push $DOCKER_IMAGE_NAME:$DOCKER_TAG
