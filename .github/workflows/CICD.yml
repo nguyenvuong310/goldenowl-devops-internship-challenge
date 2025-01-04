@@ -35,6 +35,7 @@ jobs:
           ./build.sh
         env:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+          DOCKER_TAG: ${{ github.sha }}
 
   cd:
     name: Deploy to EC2
