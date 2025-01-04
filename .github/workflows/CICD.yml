@@ -42,5 +42,10 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Pull Docker image
-        run: sudo docker pull vuong676/devops-intern-assignment-ntv:48e830b
+      - name: cd to the directory
+        run: cd goldenowl-devops-internship-challenge
+
+      - name: run deploy
+        run: |
+          chmod +x ./deploy.sh
+          ./deploy.sh
