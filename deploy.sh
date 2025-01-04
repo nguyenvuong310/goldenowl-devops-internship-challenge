@@ -18,16 +18,7 @@ handle_failure() {
 }
 
 deploy() {
-  if [ -z "$1" ]; then
-    read -r -p "Enter version you want to deploy: " version
-  else
     version=$1
-  fi
-
-  if [ -z "$version" ]; then
-    echo "You did not enter a version."
-    exit 1
-  fi
 
   export VERSION=$version
 
