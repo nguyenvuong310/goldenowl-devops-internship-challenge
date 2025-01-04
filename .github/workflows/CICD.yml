@@ -37,15 +37,17 @@ jobs:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
 
   cd:
-    name: CD Pipeline
-    needs: ci
-    runs-on: self-hosted
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
 
     steps:
-      - name: cd to the directory
-        run: cd /home/ubuntu/goldenowl-devops-internship-challenge
+      - uses: actions/checkout@v2
+      - name: Build & Deploy
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH__KEY }}
+          USER_NAME: ${{ secrets.USER_NAME }}
+          HOSTNAME: ${{ secrets.HOSTNAME }}
 
-      - name: run deploy
         run: |
-          chmod +x ./deploy.sh
-          ./deploy.sh
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
