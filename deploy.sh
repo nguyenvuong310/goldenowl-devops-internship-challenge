@@ -21,7 +21,7 @@ deploy() {
   old_container_id=$(docker ps -f name=$backend_service_name -q | tail -n1)
 
   echo "Create new container"
-  docker compose up -d --no-deps --scale $backend_service_name=2 --no-recreate $backend_service_name
+  docker-compose up -d --no-deps --scale $backend_service_name=2 --no-recreate $backend_service_name
 
   echo -e "\nStart routing requests to the new container"
   reload_nginx
@@ -35,7 +35,7 @@ deploy() {
   fi
 
   echo "Setting scale to 1"
-  docker compose up -d --no-deps --scale $backend_service_name=1 --no-recreate $backend_service_name
+  docker-compose up -d --no-deps --scale $backend_service_name=1 --no-recreate $backend_service_name
 
   echo "Deploy backend version $version successfully!!!"
 
