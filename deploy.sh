@@ -43,4 +43,4 @@ deploy() {
   docker image prune -a -f
 }
 
-deploy $(git rev-parse --short HEAD)
+deploy $1
