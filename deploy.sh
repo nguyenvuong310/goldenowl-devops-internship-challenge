@@ -26,7 +26,7 @@ deploy() {
   old_container_id=$(docker ps -f name=$backend_service_name -q | tail -n1)
 
   echo "Create new container"
-  docker compose up -d --no-deps --scale $backend_service_name=2 --no-recreate $backend_service_name
+  docker compose up -d --no-deps --scale $backend_service_name=3 --no-recreate $backend_service_name
 
   echo "Health check new container"
   new_container_id=$(docker ps -f name=$backend_service_name -q | head -n1)
@@ -36,7 +36,7 @@ deploy() {
     echo "Deploy failed. Cannot start container."
     docker stop $new_container_id
     docker rm $new_container_id
-    docker compose up -d --no-deps --scale $backend_service_name=1 --no-recreate $backend_service_name
+    docker compose up -d --no-deps --scale $backend_service_name=2 --no-recreate $backend_service_name
     handle_failure  
   }
 
