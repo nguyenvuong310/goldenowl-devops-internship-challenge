@@ -18,8 +18,8 @@ handle_failure() {
 }
 
 deploy() {
-    version=$1
 
+  version=$1
   export VERSION=$version
 
   echo "Start deploy backend version $version...."
@@ -37,7 +37,7 @@ deploy() {
     docker stop $new_container_id
     docker rm $new_container_id
     docker compose up -d --no-deps --scale $backend_service_name=1 --no-recreate $backend_service_name
-    handle_failure  # Call the failure handler before exiting
+    handle_failure  
   }
 
   echo -e "\nStart routing requests to the new container"
@@ -48,8 +48,8 @@ deploy() {
   docker rm $old_container_id
   echo "Old container removed"
 
-  echo "Setting scale to 1"
-  docker compose up -d --no-deps --scale $backend_service_name=1 --no-recreate $backend_service_name
+  echo "Setting scale to 2"
+  docker compose up -d --no-deps --scale $backend_service_name=2 --no-recreate $backend_service_name
 
   echo "Final Nginx reload"
   reload_nginx
