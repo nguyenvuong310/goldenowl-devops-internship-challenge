@@ -3,5 +3,6 @@
 # Stop on error
 set -e
 
-export VERSION=48e830b
-docker compose up -d
+export VERSION="48e830b"
+
+sudo docker compose up -d
