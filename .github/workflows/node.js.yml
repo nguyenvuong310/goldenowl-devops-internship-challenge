@@ -15,10 +15,8 @@ jobs:
         node-version: ["20"]
 
     steps:
-      # Step to checkout the code from the repository
       - uses: actions/checkout@v4
 
-      # Step to set up Node.js with cache enabled
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
@@ -29,3 +27,6 @@ jobs:
 
       - name: Run tests
         run: npm test --prefix ./src
+
+      - name: Build
+        run: ./build.sh
