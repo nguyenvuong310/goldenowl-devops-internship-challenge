@@ -3,7 +3,6 @@ version: "3.8"
 services:
   server:
     image: vuong676/devops-intern-assignment-ntv:${VERSION}
-    container_name: server
     networks:
       - "devops-internship"
 
