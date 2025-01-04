@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: cd to the directory
-        run: cd goldenowl-devops-internship-challenge
+        run: cd /home/ubuntu/goldenowl-devops-internship-challenge
 
       - name: run deploy
         run: |
