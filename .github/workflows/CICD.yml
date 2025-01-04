@@ -48,7 +48,7 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.HOSTNAME }} > ~/.ssh/known_hosts
       - name: connect and pull
-        run: ssh ${{ secrets.USER_NAME }}@${{ secrets.HOSTNAME }} "cd goldenowl-devops-internship-challenge"
+        run: ssh ${{ secrets.USER_NAME }}@${{ secrets.HOSTNAME }} "cd goldenowl-devops-internship-challenge && bash deploy.sh"
 
       - name: cleanup
         run: rm -rf ~/.ssh
