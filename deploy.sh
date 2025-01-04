@@ -49,7 +49,7 @@ deploy() {
   echo "Old container removed"
 
   echo "Setting scale to 2"
-  docker compose up -d --no-deps --scale $backend_service_name=2 --no-recreate $backend_service_name
+  docker compose up -d --no-deps --scale $backend_service_name=1 --no-recreate $backend_service_name
 
   echo "Final Nginx reload"
   reload_nginx
