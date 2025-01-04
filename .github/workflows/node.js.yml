@@ -29,6 +29,8 @@ jobs:
         run: npm test --prefix ./src
 
       - name: Build
-        run: ./build.sh
+        run: |
+          chmod +x ./build.sh
+          ./build.sh
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS}}
