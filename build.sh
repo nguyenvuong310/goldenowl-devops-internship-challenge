@@ -18,7 +18,7 @@ DOCKER_USERNAME="vuong676"
 DOCKER_TAG=$(git rev-parse --short HEAD)
 
 echo "Logging into DockerHub..."
-docker login -u vuong676 -p dckr_pat_igVOBI35VRP4_5MPH0HU0xKUVjg
+docker login -u vuong676 -p $1
 
 echo "Building Docker image: $DOCKER_IMAGE_NAME:$DOCKER_TAG ..."
 docker build -t $DOCKER_IMAGE_NAME:$DOCKER_TAG . --platform linux/amd64
