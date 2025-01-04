@@ -1,4 +1,4 @@
-name: Node.js CI
+name: CI Pipeline
 
 on:
   push:
@@ -34,10 +34,3 @@ jobs:
           ./build.sh
         env:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS}}
-
-      - name: Set up SSH key
-        run: |
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          mkdir -p ~/.ssh
-          ssh-keyscan -H 3.145.108.195 >> ~/.ssh/known_hosts
