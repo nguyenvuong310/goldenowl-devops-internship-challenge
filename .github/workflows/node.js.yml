@@ -34,3 +34,8 @@ jobs:
           ./build.sh
         env:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS}}
+
+      - name: Deploy
+        run: |
+          chmod +x ./deploy.sh
+          ./deploy.sh
