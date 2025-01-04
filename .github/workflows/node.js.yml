@@ -37,4 +37,4 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh ec2-user@ec2-3-145-108-195.us-east-2.compute.amazonaws.com 'cd goldenowl-devops-internship-challenge && chmod +x ./deploy.sh && ./deploy.sh'
+          ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-145-108-195.us-east-2.compute.amazonaws.com 'cd goldenowl-devops-internship-challenge && chmod +x ./deploy.sh && ./deploy.sh'
