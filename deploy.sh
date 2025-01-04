@@ -23,16 +23,16 @@ deploy() {
   echo "Create new container"
   docker compose up -d --no-deps --scale $backend_service_name=2 --no-recreate $backend_service_name
 
-
   echo -e "\nStart routing requests to the new container"
   reload_nginx
 
   echo "Checking if old container exists..."
-        if [ -n "$old_container_id" ]; then
-  echo "Removing old container $old_container_id"
-  docker stop $old_container_id
-  docker rm $old_container_id
-  echo "Old container removed"
+  if [ -n "$old_container_id" ]; then
+    echo "Removing old container $old_container_id"
+    docker stop $old_container_id
+    docker rm $old_container_id
+    echo "Old container removed"
+  fi
 
   echo "Setting scale to 1"
   docker compose up -d --no-deps --scale $backend_service_name=1 --no-recreate $backend_service_name
