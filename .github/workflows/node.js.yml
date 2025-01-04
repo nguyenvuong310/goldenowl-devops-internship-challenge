@@ -35,8 +35,9 @@ jobs:
         env:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS}}
 
-      - name: Deploy
+      - name: Set up SSH key
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} -T ec2-user@ec2-3-145-108-195.us-east-2.compute.amazonaws.com 'cd goldenowl-devops-internship-challenge && chmod +x ./deploy.sh && ./deploy.sh'
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 3.145.108.195 >> ~/.ssh/known_hosts
