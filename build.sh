@@ -15,7 +15,7 @@ fi
 
 DOCKER_IMAGE_NAME="vuong676/devops-intern-assignment-ntv"
 DOCKER_USERNAME="vuong676"
-DOCKER_TAG=$(git rev-parse --short HEAD)
+DOCKER_TAG=${{ github.sha }}
 
 echo "Logging into DockerHub..."
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
