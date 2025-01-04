@@ -42,13 +42,13 @@ jobs:
     needs: ci
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Build & Deploy
-        env:
-          PRIVATE_KEY: ${{ secrets.SSH__KEY }}
-          USER_NAME: ${{ secrets.USER_NAME }}
-          HOSTNAME: ${{ secrets.HOSTNAME }}
-
+      - name: install ssh keys
         run: |
-          echo "$PRIVATE_KEY" > private_key.pem && chmod 600 private_key.pem
-          ssh -o StrictHostKeyChecking=no -i "private_key.pem" ${USER_NAME}@${HOSTNAME}
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.HOSTNAME }} > ~/.ssh/known_hosts
+      - name: connect and pull
+        run: ssh ${{ secrets.USER_NAME }}@${{ secrets.HOSTNAME }} "cd goldenowl-devops-internship-challenge"
+
+      - name: cleanup
+        run: rm -rf ~/.ssh
