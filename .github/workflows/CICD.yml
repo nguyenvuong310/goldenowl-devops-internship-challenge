@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     branches: ["feature"]
 
 jobs:
-  build:
+  ci:
+    name: CI Pipeline
     runs-on: ubuntu-latest
 
     strategy:
@@ -33,4 +34,13 @@ jobs:
           chmod +x ./build.sh
           ./build.sh
         env:
-          DOCKER_PASS: ${{ secrets.DOCKER_PASS}}
+          DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+
+  cd:
+    name: CD Pipeline
+    needs: ci
+    runs-on: self-hosted
+
+    steps:
+      - name: Pull Docker image
+        run: sudo docker pull vuong676/devops-intern-assignment-ntv:48e830b
